@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: citron-0048-component
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: citron-0048-component
+    app.kubernetes.io/part-of: citron-0048-app
+  name: citron-0048-component
+  namespace: citron-0048-tenant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-quarkus-app
+      app.kubernetes.io/instance: citron-0048-component
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: java-quarkus-app
+        app.kubernetes.io/instance: citron-0048-component
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/citron-0048/devfile-sample-code-with-quarkus:8b72628e43f5464fbb835993dc1dfd82
+        name: my-java-quarkus
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 250Mi
+          requests:
+            cpu: 10m
+            memory: 100Mi
+status: {}
